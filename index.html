@@ -20,16 +20,43 @@
 
             <form id="workoutForm">
                 <label for="exercise">Exercise Name:</label>
-                <input type="text" id="exercise" required>
+                <select id="exercise" required>
+                    <option value="">Select an Execerise</option>
+                    <option value="Bench Press">Bench Press</option>
+                    <option value="Squats">Squats</option>
+                    <option value="Bicep Curls">Bicep Curls</option>
+                    <option value="Shoulder Press">Shoulder Press</option>
+                    <option value="Deadlift">Deadlift</option>
+                    <option value="Lunges">Lunges</option>
+                    <option value="Back Squats">Back Squats</option>
+                    <option value="Front Squats">Bench Press</option>
+                    <option value="Bench Press">Bench Press</option>
+                    <option value="Pushups">Pushups</option>
+                    <option value="Crunches">Crunches</option>
+                    <option value="Situps">Situps</option>
+                    <option value="Leg Raises">Leg Raises</option>
+                    <option value="Chest Press">Chest Press</option>
+                    <option value="Dumbbell Bench Press">Dumbbell Bench Press</option>
+                    <option value="Planks">Planks</option>
+                    <option value="Other">Other</option>
+                </select>
 
-                <label for="sets">Sets:</label>
-                <input type="number" id="sets" min="1" required>
+                <input 
+                    type="text";
+                    id="customExercise"
+                    placeholder="Enter your Execise Name"
+                    maxlength="25"
+                    style="display: none;"
+                >
 
-                <label for="reps">Reps:</label>
-                <input type="number" id="reps" min="1" required>
+                <label for="sets">Sets (1-20):</label>
+                <input type="number" id="sets" min="1" max="20" step="1" required>
 
-                <label for="weight">Weight (lbs):</label>
-                <input type="number" id="weight" min="0" step="0.5" required>
+                <label for="reps">Reps (1-50):</label>
+                <input type="number" id="reps" min="1" max="50" step="1" required>
+
+                <label for="weight">Weight (1-500 lbs):</label>
+                <input type="number" id="weight" min="1" max="500" step="0.5" required>
 
                 <label for="date">Date:</label>
                 <input type="date" id="date" required>
