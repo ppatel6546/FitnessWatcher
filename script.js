@@ -1,10 +1,27 @@
-
 console.log("FitnessWatcher JavaScript is working!");
 
 const workoutForm = document.getElementById("workoutForm");
 const exerciseDropdown = document.getElementById("exercise");
 const customExercise = document.getElementById("customExercise");
 let editingWorkoutIndex = null;
+
+const workoutStorage = {
+    getAll: function() {
+        return JSON.parse(localStorage.getItem("workouts")) || [];
+    },
+
+    saveAll: function(workouts) {
+        localStorage.setItem("workouts", JSON.stringify(workouts));
+    }
+};
+
+function getWorkouts(storage = workoutStorage) {
+    return storage.getAll();
+}
+
+function saveWorkouts(workouts, storage = workoutStorage) {
+    storage.saveAll(workouts);
+}
 
 exerciseDropdown.addEventListener("change", function () {
     if (exerciseDropdown.value === "Other") {
@@ -49,8 +66,7 @@ workoutForm.addEventListener("submit", function(event) {
         date: date
     };
 
-   
-    const workouts = JSON.parse(localStorage.getItem("workouts")) || [];
+    const workouts = getWorkouts();
 
     if (editingWorkoutIndex !== null) {
     if (editingWorkoutIndex < 0 || editingWorkoutIndex >= workouts.length) {
@@ -65,7 +81,7 @@ workoutForm.addEventListener("submit", function(event) {
     alert("Workout saved successfully!");
     }
 
-    localStorage.setItem("workouts", JSON.stringify(workouts));
+    saveWorkouts(workouts);
 
 editingWorkoutIndex = null;
 
@@ -77,10 +93,8 @@ editingWorkoutIndex = null;
     customExercise.required = false;
 });
 
-
 function editWorkout(index) {
-    const workouts = JSON.parse(localStorage.getItem("workouts")) || [];
-    console.log("Editing workout index:", editingWorkoutIndex); 
+    const workouts = getWorkouts();
     const workout = workouts[index];
 
     if (!workout) {
@@ -117,12 +131,11 @@ function editWorkout(index) {
     });
 }
 
-
 function displayWorkouts() {
     const workoutList = document.getElementById("workoutList");
     const emptyMessage = document.getElementById("emptyMessage");
 
-    const workouts = JSON.parse(localStorage.getItem("workouts")) || [];
+    const workouts = getWorkouts();
 
     workoutList.innerHTML = "";
 
