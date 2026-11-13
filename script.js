@@ -46,18 +46,6 @@ workoutForm.addEventListener("submit", function(event) {
     const weight = Number(document.getElementById("weight").value);
     const date = document.getElementById("date").value;
 
-    if (!exercise) {
-        alert("Please enter an exercise name.");
-        return;
-    }
-
-    if (sets < 1 || sets > 20 ||
-        reps < 1 || reps > 50 ||
-        weight < 0 || weight > 500) {
-        alert("Please enter valid sets, reps, and weight.");
-        return;
-    }
-
     const workout = {
         exercise: exercise,
         sets: sets,
@@ -66,22 +54,37 @@ workoutForm.addEventListener("submit", function(event) {
         date: date
     };
 
-    const workouts = getWorkouts();
-
-    if (editingWorkoutIndex !== null) {
-    if (editingWorkoutIndex < 0 || editingWorkoutIndex >= workouts.length) {
-        alert("Workout not found.");
+    if (!validateWorkout(workout)) {
+        alert("Please enter valid workout information.");
         return;
     }
 
-    workouts[editingWorkoutIndex] = workout;
-    alert("Workout updated successfully!");
-    } else {
-    workouts.push(workout);
-    alert("Workout saved successfully!");
+    const workouts = getWorkouts();
+
+    let updatedWorkouts;
+
+    if (editingWorkoutIndex !== null) {
+        try {
+        updatedWorkouts = updateWorkout(
+            workouts,
+            editingWorkoutIndex,
+            workout
+        );
+
+        alert("Workout updated successfully!");
+        } catch (error) {
+        alert(error.message);
+        return;
     }
 
-    saveWorkouts(workouts);
+    } else {    
+    updatedWorkouts = [...workouts, workout];
+    alert("Workout saved successfully!");
+
+    }
+
+    saveWorkouts(updatedWorkouts);
+
 
 editingWorkoutIndex = null;
 
