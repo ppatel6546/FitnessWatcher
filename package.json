@@ -1,0 +1,24 @@
+{
+  "name": "fitnesswatcher",
+  "version": "1.0.0",
+  "description": "FitnessWatcher is a personal fitness tracker website built using HTML, CSS, and JavaScript.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppatel6546/FitnessWatcher.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ppatel6546/FitnessWatcher/issues"
+  },
+  "homepage": "https://github.com/ppatel6546/FitnessWatcher#readme",
+  "devDependencies": {
+    "vitest": "^5.1.0"
+  }
+}
