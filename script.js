@@ -167,10 +167,34 @@ function displayWorkouts() {
             editWorkout(index);
             });
 
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.type = "button";
+
+            deleteButton.addEventListener("click", function() {
+            const confirmed = confirm(
+            "Are you sure you want to delete this workout?"
+            );
+
+            if (!confirmed) {
+            return;
+            }
+
+            const workouts = getWorkouts();
+            const updatedWorkouts = deleteWorkout(workouts, index);
+
+            saveWorkouts(updatedWorkouts);
+            editingWorkoutIndex = null;
+            displayWorkouts();
+ 
+            alert("Workout deleted successfully!");
+            });
+    
             listItem.appendChild(workoutText);
             listItem.appendChild(editButton);
-
+            listItem.appendChild(deleteButton);
             workoutList.appendChild(listItem);
+            
         });
     }
 }
