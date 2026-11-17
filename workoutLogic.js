@@ -30,11 +30,29 @@ function updateWorkout(workouts, index, updatedWorkout) {
     return updatedWorkouts;
 }
 
+function deleteWorkout(workouts, index) {
+    if (!Number.isInteger(index) ||
+        index < 0 ||
+        index >= workouts.length) {
+        throw new Error("Workout not found.");
+    }
+
+    const updatedWorkouts = [...workouts];
+    updatedWorkouts.splice(index, 1);
+
+    return updatedWorkouts;
+}
+
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = { updateWorkout, validateWorkout };
+    module.exports = {
+        updateWorkout,
+        validateWorkout,
+        deleteWorkout
+    };
 }
 
 if (typeof window !== "undefined") {
     window.updateWorkout = updateWorkout;
     window.validateWorkout = validateWorkout;
+    window.deleteWorkout = deleteWorkout;
 }

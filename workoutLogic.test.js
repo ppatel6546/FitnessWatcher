@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-const { updateWorkout, validateWorkout } = require("./workoutLogic");
+const { updateWorkout, validateWorkout, deleteWorkout } = require("./workoutLogic");
 
 describe("FitnessWatcher Edit Workout Tests", () => {
 
@@ -94,3 +94,34 @@ describe("FitnessWatcher Workout Validation Tests", () => {
 });
 
 });
+
+
+describe("FitnessWatcher Delete Workout Tests", () => {
+
+    const workouts = [
+        { exercise: "Bench Press", sets: 3, reps: 10, weight: 100 },
+        { exercise: "Squats", sets: 4, reps: 8, weight: 150 }
+    ];
+
+    it("should delete the selected workout", () => {
+        const result = deleteWorkout(workouts, 0);
+
+        expect(result).toHaveLength(1);
+        expect(result[0].exercise).toBe("Squats");
+    });
+
+    it("should reject an invalid workout index", () => {
+        expect(() => {
+            deleteWorkout(workouts, 5);
+        }).toThrow("Workout not found.");
+    });
+
+    it("should not change the original workout list", () => {
+        const result = deleteWorkout(workouts, 0);
+
+        expect(workouts).toHaveLength(2);
+        expect(result).toHaveLength(1);
+    });
+
+});
+
